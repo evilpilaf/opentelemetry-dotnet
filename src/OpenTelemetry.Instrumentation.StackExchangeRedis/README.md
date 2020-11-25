@@ -49,12 +49,12 @@ public class Program
 }
 ```
 
-For an ASP.NET Core application, adding instrumentation is typically done in
-the `ConfigureServices` of your `Startup` class. Refer to documentation for
-[OpenTelemetry.Instrumentation.AspNetCore](../OpenTelemetry.Instrumentation.AspNetCore/README.md).
+For an ASP.NET Core application, you must also enable the AspNetCore instrumentation,
+this is typically done in the `ConfigureServices` of your `Startup` class.
+Refer to documentation for [`OpenTelemetry.Instrumentation.AspNetCore`](../OpenTelemetry.Instrumentation.AspNetCore/README.md).
 
 For an ASP.NET application, adding instrumentation is typically done in the
-`Global.asax.cs`. Refer to documentation for [OpenTelemetry.Instrumentation.AspNet](../OpenTelemetry.Instrumentation.AspNet/README.md).
+`Global.asax.cs`. Refer to documentation for [`OpenTelemetry.Instrumentation.AspNet`](../OpenTelemetry.Instrumentation.AspNet/README.md).
 
 ## Advanced configuration
 
@@ -79,7 +79,22 @@ using Sdk.CreateTracerProviderBuilder()
     .Build();
 ```
 
+## Metrics collected
+
+Some of the metrics collected include:
+
+```
+Timing example:
+command.CommandCreated;          //2019-01-10 22:18:2
+command.CreationToEnqueued;      // 00:00:32.4571995
+command.EnqueuedToSending;       // 00:00:00.0352838
+command.SentToResponse;          // 00:00:00.0060586
+command.ResponseToCompletion;    // 00:00:00.00026
+```
+
+See [the open telemetry specifiacation](https://github.com/open-telemetry/opentelemetry-specification/blob/master/specification/trace/semantic_conventions/database.md) for more information on the provided span tags
+
 ## References
 
-* [OpenTelemetry Project](https://opentelemetry.io/)
-* [StackExchange.Redis Profiling](https://stackexchange.github.io/StackExchange.Redis/Profiling_v1.html)
+- [OpenTelemetry Project](https://opentelemetry.io/)
+- [StackExchange.Redis Profiling](https://stackexchange.github.io/StackExchange.Redis/Profiling_v1.html)
